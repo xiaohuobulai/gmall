@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.gmall.pms.mapper.CategoryMapper">
+
+    <resultMap id="queryLevel2CatesWithSubsPidResultMap" type="CategoryEntity" autoMapping="true">
+        <id column="id" property="id"></id>
+        <collection property="subs" javaType="List" ofType="CategoryEntity" select="queryLevel2CatesWithSubsPid" column="id">
+        </collection>
+    </resultMap>
+    <select id="queryLevel2CatesWithSubsPid" resultMap="queryLevel2CatesWithSubsPidResultMap">
+        select *
+        from pms_category
+        where parent_id = #{pid}
+    </select>
+
+</mapper>
